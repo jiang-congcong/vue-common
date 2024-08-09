@@ -119,8 +119,8 @@ export default {
     },
     //页面加载好后触发的操作
     mounted() {
-        axios.get("http://localhost:8090/person/list").then(response => {
-            let res = response.data;  
+        this.request.get('person/list').then(response => {
+            let res = response;  
             console.log(res)
             if (res.code !== 200) {  
                 console.log("请求错误！")  
@@ -142,6 +142,7 @@ export default {
             this.collapseIcon = this.isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'  
         },
         logout() {
+            localStorage.removeItem("token");
             this.$router.push("/login");
         },
         modifyPassword() {

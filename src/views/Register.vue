@@ -21,6 +21,9 @@
                     <el-form-item>
                         <el-button type="primary" style="width: 100%;" @click="login">注册</el-button>
                     </el-form-item>
+                    <div style="text-align: left; font-size: 15px;">
+                            已有账号？去<span style="color: #0f9876; cursor: pointer;" @click="$router.push('/login')">登录</span> 
+                    </div>
                 </el-form>
             </div>
         </div>
@@ -28,7 +31,6 @@
 </template>
 
 <script>
-import axios from 'axios';  
 
     export default {
         name: 'Login',
@@ -72,10 +74,10 @@ import axios from 'axios';
             login() {
                 this.$refs['userRef'].validate((valid) => {
                     if (valid) {
-                        axios.post("http://localhost:8090/user/register", this.user).then(response => {
+                        this.request.post("user/register", this.user).then(response => {
                             console.log(response)
-                            if (response.data.code != '200') {
-                                this.$message.error(response.data.message)
+                            if (response.code != '200') {
+                                this.$message.error(response.message)
                             } else {
                                 this.$message({
                                     message: '注册成功！',
@@ -83,7 +85,7 @@ import axios from 'axios';
                                 });
 
                                 //此处需要服务端查询下注册的用户信息返回存入浏览器
-                                localStorage.setItem("token", JSON.stringify(response.data.data));
+                                localStorage.setItem("token", JSON.stringify(response.data));
                                 this.$router.push("/");
                             }
                         })

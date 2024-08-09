@@ -42,7 +42,6 @@
 
 <script>
 import ValidCode from '@/components/ValidCode.vue';
-import axios from 'axios';  
 
     export default {
         name: 'Login',
@@ -92,12 +91,12 @@ import axios from 'axios';
             login() {
                 this.$refs['userRef'].validate((valid) => {
                     if (valid) {
-                        axios.post("http://localhost:8090/user/login", this.user).then(response => {
+                        this.request.post("user/login", this.user).then(response => {
                             console.log(response)
-                            if (response.data.code != '200') {
+                            if (response.code != '200') {
                                 this.$message.error("用户名或密码错误！")
                             } else {
-                                localStorage.setItem("token", JSON.stringify(response.data.data))
+                                localStorage.setItem("token", JSON.stringify(response.data))
                                 this.$router.push("/");
                             }
                         })
