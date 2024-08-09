@@ -85,7 +85,7 @@
                                 });
 
                                 //此处需要服务端查询下注册的用户信息返回存入浏览器
-                                localStorage.setItem("token", JSON.stringify(response.data));
+                                localStorage.setItem("token", JSON.stringify(response.data.token));
                                 this.$router.push("/");
                             }
                         })
