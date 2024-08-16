@@ -96,7 +96,7 @@ import ValidCode from '@/components/ValidCode.vue';
                             if (response.code != '200') {
                                 this.$message.error("用户名或密码错误！")
                             } else {
-                                localStorage.setItem("token", JSON.stringify(response.data.token))
+                                localStorage.setItem("token", JSON.stringify(response.data))
                                 this.$router.push("/");
                             }
                         })

@@ -17,9 +17,9 @@ import router from '../router';
                         <i class="el-icon-house"></i>
                         <span slot="title">系统首页</span>                        
                     </el-menu-item>
-                    <el-menu-item index="/1">                        
+                    <el-menu-item index="/statistics">                        
                         <i class="el-icon-s-data"></i>
-                        <span slot="title">统计页签</span>                       
+                        <span slot="title" style="margin-right: 14px;">仪表盘</span>                       
                     </el-menu-item>
 
                     <el-submenu index="3">
@@ -40,20 +40,18 @@ import router from '../router';
                     <i :class="collapseIcon" style="font-size: 16px;" @click="handleCollapse"></i>
                     <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-left: 20px;">
                         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                        <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-                        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-                        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+                        <el-breadcrumb-item :to="{ path: $route.path}" v-if="$route.path !== '/' && $route.path !== '/home' ">{{ $route.name}}</el-breadcrumb-item>
                     </el-breadcrumb>
 
                     <!--用户信息 -->
                     <div style="flex: 1; width: 0; display: flex; align-items: center; justify-content: flex-end;">
                         <el-dropdown placement="bottom">
                             <div style="display: flex; align-items: center; cursor: default;">
-                                <img src="@/assets/logo.jpg" style="width: 40px; height: 40px;">
-                                <span>用户名</span>
+                                <img :src="headPic" style="width: 40px; height: 40px;">
+                                <span v-text="headUserName"></span>
                             </div>                       
-                            <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item @click.native="userInfo">个人信息</el-dropdown-item>
+                            <el-dropdown-menu slot="dropdown" >
+                                <el-dropdown-item @click.native="personInfo">个人信息</el-dropdown-item>
                                 <el-dropdown-item @click.native="modifyPassword">修改密码</el-dropdown-item>
                                 <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>                       
                             </el-dropdown-menu>
@@ -80,12 +78,31 @@ export default {
         return {
             isCollapse : false,
             asideWidth : '200px',
-            collapseIcon : 'el-icon-s-fold'
+            collapseIcon : 'el-icon-s-fold',
+            user: {
+                id: '1',
+                birthday: '2016-05-02',
+                username: '王小虎',
+                phone: '13627456398',
+                address: '上海市普陀区金沙江路 1518 弄',
+                mail: 'qq@qq.com',
+                headPic : '@/assets/logo.jpg',
+            },
+            headPic : '@/assets/logo.jpg',
+            headUserName: '王小虎'
         }
     },
     //页面加载好后触发的操作
     mounted() {
-        
+        console.log(this.$route)
+    },
+    //页面创建时触发的
+    created() {
+        let token = localStorage.getItem("token") ;
+        let userInfo = JSON.parse(token);
+        this.user = userInfo;
+        this.headUserName = userInfo.username;
+        this.headPic = userInfo.headPic;
     },
     methods: {
         handleCollapse() {
@@ -98,10 +115,10 @@ export default {
             this.$router.push("/login");
         },
         modifyPassword() {
-            
+            this.$router.push("/modifyPassword")
         },
-        userInfo() {
-            console.log("用户信息")
+        personInfo() {
+            this.$router.push("/person")
         }
     }
 }

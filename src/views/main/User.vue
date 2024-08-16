@@ -3,25 +3,24 @@
         <div style="float: right; margin-bottom: 10px;">
             操作按钮区域
         </div>
-        <el-table highlight-current-row :data="users" style="width: 100%; ">
-            <el-table-column align="center" prop="id" label="id" width="180">
+        <el-table highlight-current-row :data="users" style="width: 100%; font-size: 15px; ">
+            <el-table-column align="center" prop="id" label="id" >
             </el-table-column>
-            <el-table-column align="center" prop="name" label="姓名" width="120">
+            <el-table-column align="center" prop="name" label="用户名" >
             </el-table-column>
-            <el-table-column align="center" prop="birthday" label="生日" width="120">
+            <el-table-column align="center" prop="birthday" label="生日" >
             </el-table-column>
-            <el-table-column align="center" prop="phone" label="手机号" width="180">
+            <el-table-column align="center" prop="phone" label="手机号" >
             </el-table-column>
-            <el-table-column align="center" prop="address" label="地址" width="180">
+            <el-table-column align="center" prop="address" label="地址" >
             </el-table-column>
-            <el-table-column align="center" prop="mail" label="邮箱" width="180">
+            <el-table-column align="center" prop="mail" label="邮箱">
             </el-table-column>
-
-            <el-table-column align="center" fixed="right" label="操作" width="180">
+            <el-table-column align="center" fixed="right" label="操作">
                 <template slot-scope="scope">
-                    <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-                    <el-button type="text" size="small" @click="edit(scope.row)">编辑</el-button>
-                    <el-button type="text" size="small" @click="delete (scope.row)">删除</el-button>
+                    <el-button @click="handleClick(scope.row)" type="text" size="medium">查看</el-button>
+                    <el-button type="text" size="medium" @click="edit(scope.row)">编辑</el-button>
+                    <el-button type="text" size="medium" @click="delete (scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -57,9 +56,9 @@ export default {
                 address: '上海市普陀区金沙江路 1518 弄',
                 mail: 'qq3@qq.com'
             }],
-            total : "200",
-            pageSize: "20",
-            currentPage: "1"
+            total : 200,
+            pageSize: 20,
+            currentPage: 1
         }
     },
     methods: {

@@ -46,14 +46,29 @@ const routes = [
     children: [
       {
         path: 'home',
-        name: 'Home',
+        name: '首页',
         component: () => import('../views/main/HomeView.vue')
       },
       {
         path: 'user',
-        name: 'User',
+        name: '用户信息',
         component: () => import('../views/main/User.vue')
       },
+      {
+        path: 'person',
+        name: '个人信息',
+        component: () => import('../views/main/Person.vue')
+      },
+      {
+        path: 'modifyPassword',
+        name: '修改密码',
+        component: () => import('../views/main/ModifyPassword.vue')
+      },
+      {
+        path: 'statistics',
+        name: '仪表盘',
+        component: () => import('../views/main/Statistics.vue')
+      }
     ]
   },
   {
